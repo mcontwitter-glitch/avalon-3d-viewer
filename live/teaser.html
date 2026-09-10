@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Cinematic Teaser</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:100%; height:100%; background:#000; overflow:hidden; font-family:Georgia,serif; }
+  .stage { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; }
+  .frame { position:relative; width:100vw; height:41.8vw; max-height:100vh; max-width:239vh; overflow:hidden; background:#000; }
+  .frame img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1.6s ease; }
+  .frame img.on { opacity:1; }
+  .card { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; opacity:0; transition:opacity 1.6s ease; }
+  .card.on { opacity:1; }
+  .card img { max-width:56%; max-height:56%; width:auto; height:auto; object-fit:contain; filter:drop-shadow(0 4px 22px rgba(140,125,90,.35)); }
+  .cap { position:absolute; left:0; right:0; bottom:7%; text-align:center; opacity:0; transition:opacity 1.2s ease; }
+  .cap.on { opacity:1; }
+  .cap h2 { font-size:clamp(14px,3.2vw,22px); letter-spacing:.42em; font-weight:normal; color:#e2ddd0; text-transform:uppercase; text-shadow:0 2px 12px #000; }
+  .cap p { margin-top:8px; font-size:clamp(11px,2vw,14px); letter-spacing:.14em; color:#9a958a; text-shadow:0 2px 10px #000; }
+  .roman { font-size:clamp(10px,1.8vw,13px); letter-spacing:.5em; color:#a3895a; margin-bottom:6px; text-transform:uppercase; text-shadow:0 2px 10px #000; }
+  .ui { position:fixed; top:14px; right:16px; z-index:9; font-size:11px; letter-spacing:.3em; }
+  .ui a { color:#8a8578; text-decoration:none; }
+  .bar { position:fixed; left:0; bottom:0; height:2px; background:#a3895a; width:0%; z-index:9; }
+</style>
+</head>
+<body>
+<div class="frame" id="frame">
+  <div class="card" id="c0"><img src="cinematic/STUDIO-LOGO.png" alt="BIG Entertainment"></div>
+  <div class="card" id="c1"><img src="cinematic/TITLE-LOGO.png" alt="AVALON: The Waking Gates"></div>
+  <img id="s2" src="cinematic_v2/CINEMATIC-TEASER-KEYART-V1.jpg" alt="">
+  <img id="s3" src="cinematic_v2/CINEMATIC-CAMPAIGN-I-AGE-OF-KINGS-V1.jpg" alt="">
+  <img id="s4" src="cinematic_v2/CINEMATIC-CAMPAIGN-II-FIRST-RUIN-V1.jpg" alt="">
+  <img id="s5" src="cinematic_v2/CINEMATIC-CAMPAIGN-III-AWAKENING-V1.jpg" alt="">
+  <img id="s6" src="cinematic_v2/CINEMATIC-CAMPAIGN-IV-SIX-PATHS-V1.jpg" alt="">
+  <img id="s7" src="cinematic_v2/CINEMATIC-CAMPAIGN-V-DIVINE-CONFLICT-V1.jpg" alt="">
+  <img id="s8" src="cinematic_v2/CINEMATIC-CAMPAIGN-VI-PRIMORDIAL-TRUTH-V1.jpg" alt="">
+  <div class="cap" id="cap2"><h2>The Waking Gates</h2><p>They were never myths. They were sleeping.</p></div>
+  <div class="cap" id="cap3"><div class="roman">Campaign I</div><h2>The Age of Kings</h2><p>The gods are distant. Mortals crown themselves.</p></div>
+  <div class="cap" id="cap4"><div class="roman">Campaign II</div><h2>The First Ruin</h2><p>Something older than civilization stirs beneath the stone.</p></div>
+  <div class="cap" id="cap5"><div class="roman">Campaign III</div><h2>The Awakening</h2><p>The seals weaken. The Hollow Tide rises.</p></div>
+  <div class="cap" id="cap6"><div class="roman">Campaign IV</div><h2>Six Paths</h2><p>Six realms. Six classes. Six gods. Choose how you wake.</p></div>
+  <div class="cap" id="cap7"><div class="roman">Campaign V</div><h2>Divine Conflict</h2><p>The gods take the field &#8212; and the world takes sides.</p></div>
+  <div class="cap" id="cap8"><div class="roman">Campaign VI</div><h2>Primordial Truth</h2><p>Command the gods. End the Unmaking. Decide how the world begins again.</p></div>
+</div>
+<div class="ui"><a href="index.html">&#10005; END</a></div>
+<div class="bar" id="bar"></div>
+<script>
+const beats = [
+  {id:'c0', cap:null,  ms:2400},
+  {id:'c1', cap:null,  ms:2800},
+  {id:'s2', cap:'cap2', ms:5200},
+  {id:'s3', cap:'cap3', ms:5200},
+  {id:'s4', cap:'cap4', ms:5200},
+  {id:'s5', cap:'cap5', ms:5200},
+  {id:'s6', cap:'cap6', ms:5200},
+  {id:'s7', cap:'cap7', ms:5200},
+  {id:'s8', cap:'cap8', ms:6400},
+];
+let i = 0, t = null, raf = null, start = 0;
+function on(el){ document.getElementById(el).classList.add('on'); }
+function off(el){ document.getElementById(el).classList.remove('on'); }
+function step(){
+  if (i > 0) { off(beats[i-1].id); if (beats[i-1].cap) off(beats[i-1].cap); }
+  if (i >= beats.length){ location.href='index.html'; return; }
+  const b = beats[i];
+  on(b.id); if (b.cap) on(b.cap);
+  start = performance.now();
+  t = setTimeout(step, b.ms);
+}
+function barLoop(now){
+  if (t && i < beats.length){
+    const p = Math.min(100, (now-start)/beats[i].ms*100);
+    document.getElementById('bar').style.width = p+'%';
+  }
+  raf = requestAnimationFrame(barLoop);
+}
+document.body.addEventListener('click', e=>{
+  if (e.target.tagName==='A') return;
+  clearTimeout(t); t=null; step();
+});
+step(); raf = requestAnimationFrame(barLoop);
+</script>
+</body>
+</html>
