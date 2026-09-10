@@ -1,5 +1,5 @@
 {
-  "content_version": "2026.09.10-6",
+  "content_version": "2026.09.10-7",
   "files": [
     "art/CINEMATIC-CAMPAIGN-I-AGE-OF-KINGS-CANON.png",
     "art/CINEMATIC-TEASER-KEYART-CANON.png",
@@ -57,7 +57,6 @@
     "gallery.html",
     "index.html",
     "model3d.html",
-    "models/AEDAN-V7-MO-ARMED.glb",
     "overview.html",
     "teaser.html",
     "ui/ui-index.html"
