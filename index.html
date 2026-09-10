@@ -40,7 +40,7 @@ function fatal(t) { errEl.style.display='block'; errEl.textContent='ERROR \u2014
 window.onerror = function(msg, src, line) { fatal(msg + ' @' + (src||'?') + ':' + (line||'?')); };
 if (typeof THREE === 'undefined') { fatal('THREE undefined \u2014 CDN scripts blocked'); }
 else try {
-  var GLB = 'https://base44.app/api/apps/69f56986c51e35a876adf38d/files/mp/public/69f56986c51e35a876adf38d/c7d4ea985_AEDAN-RIGGED-V3.glb';
+  var GLB = 'https://base44.app/api/apps/69f56986c51e35a876adf38d/files/mp/public/69f56986c51e35a876adf38d/b38fbd2f6_AEDAN-RIGGED-V5.glb';
   var renderer = new THREE.WebGLRenderer({ antialias:true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(innerWidth, innerHeight);
