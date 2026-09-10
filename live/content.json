@@ -1,5 +1,5 @@
 {
-  "content_version": "2026.09.10-1031",
+  "content_version": "2026.09.10-2211",
   "files": [
     "art/CINEMATIC-CAMPAIGN-I-AGE-OF-KINGS-CANON.png",
     "art/CINEMATIC-TEASER-KEYART-CANON.png",
@@ -42,7 +42,6 @@
     "art/ENEMY-T3-ECHO-OF-THE-FORGOTTEN-CANON.jpg",
     "art/ENEMY-T3-GATE-WORM-CANON.jpg",
     "art/FORGE-QC-SOVEREIGN-REFORGED-V1.png",
-    "art/FORGE-QC-SOVEREIGN-REFORGED-V2.png",
     "art/GOD-ASHFALL-EMBER-KING-CANON.jpg",
     "art/GOD-DUSKMOURN-DEATH-KING-CANON.jpg",
     "art/GOD-EVERBLOOM-LIFE-MOTHER-CANON.jpg",
@@ -61,7 +60,8 @@
     "model3d.html",
     "overview.html",
     "teaser.html",
-    "ui/ui-index.html"
+    "ui/ui-index.html",
+    "art/FORGE-QC-SOVEREIGN-REFORGED-V3.png"
   ],
   "apk": {
     "versionCode": 14,
