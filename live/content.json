@@ -1,5 +1,5 @@
 {
-  "content_version": "2026.09.10-2227",
+  "content_version": "2026.09.10-2211",
   "files": [
     "art/CINEMATIC-CAMPAIGN-I-AGE-OF-KINGS-CANON.png",
     "art/CINEMATIC-TEASER-KEYART-CANON.png",
@@ -61,8 +61,7 @@
     "overview.html",
     "teaser.html",
     "ui/ui-index.html",
-    "art/FORGE-QC-SOVEREIGN-REFORGED-V3.png",
-    "art/FORGE-QC-SOVEREIGN-WALK-V1.png"
+    "art/FORGE-QC-SOVEREIGN-REFORGED-V3.png"
   ],
   "apk": {
     "versionCode": 14,
