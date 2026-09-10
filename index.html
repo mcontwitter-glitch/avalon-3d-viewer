@@ -15,9 +15,13 @@
   #stage { position:fixed; top:0; left:0; width:100%; height:100%; }
   #tip { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); color:#6f6a5e; font-size:13px; letter-spacing:.2em; z-index:5; }
   #err { position:fixed; top:70px; left:12px; right:12px; background:#2a1114; color:#ff8a8a; font:12px/1.5 monospace; padding:12px; border:1px solid #55262b; z-index:20; display:none; white-space:pre-wrap; }
+  #anims { position:fixed; bottom:14px; left:0; right:0; display:flex; gap:8px; justify-content:center; z-index:30; }
+  #anims button { background:rgba(20,22,26,.82); color:#a3895a; border:1px solid #33353d; padding:8px 14px; letter-spacing:.18em; font-size:10px; font-family:Georgia,serif; }
+  #anims button.on { color:#e6ddca; border-color:#a3895a; background:rgba(163,137,90,.18); }
 </style>
 </head>
 <body>
+<div id="anims"></div>
 <div class="top">
   <div>
     <div class="name">AEDAN STORMCROWN</div>
@@ -70,8 +74,27 @@ else try {
     scene.add(model);
     if (gltf.animations && gltf.animations.length) {
       mixer = new THREE.AnimationMixer(model);
-      var act = gltf.animations[0];
-      mixer.clipAction(act).play();
+      var clips = gltf.animations; var current = null;
+      var bar = document.getElementById('anims');
+      function play(name) {
+        var clip = null;
+        for (var c of clips) { if (c.name.toLowerCase().indexOf(name) >= 0) { clip = c; break; } }
+        if (!clip) return;
+        if (current) mixer.clipAction(current).fadeOut(0.25);
+        var action = mixer.clipAction(clip);
+        action.reset().fadeIn(0.25).play(); current = clip;
+        var btns = bar.querySelectorAll('button');
+        for (var b of btns) b.classList.toggle('on', b.dataset.clip === name);
+      }
+      ['idle','walk','thrust','hit'].forEach(function(nm){
+        for (var c of clips) { if (c.name.toLowerCase().indexOf(nm) >= 0 || (nm==='idle' && c.name.toLowerCase().indexOf('action')>=0)) {
+          var btn = document.createElement('button');
+          btn.textContent = nm.toUpperCase(); btn.dataset.clip = nm;
+          btn.onclick = function(){ play(this.dataset.clip); };
+          bar.appendChild(btn); break;
+        }
+      });
+      play('idle');
       stage(act.name.toUpperCase() + ' \u2022 PLAYING');
     } else { stage('STATIC \u2022 NO ANIM IN FILE'); }
   }, function(ev) { if (ev.total) stage('FETCHING ' + ev.loaded + ' / ' + ev.total + ' bytes'); }, function(err) { fatal('loader: ' + (err && err.message ? err.message : 'load failed')); });
