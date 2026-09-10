@@ -24,7 +24,7 @@
 <div id="anims"></div>
 <div class="top">
   <div>
-    <div class="name">AEDAN STORMCROWN</div>
+    <div class="name">AEDAN STORMCROWN — V7 • REAL MOCAP</div>
     <div class="sub">SOVEREIGN OF SKYREND &mdash; LIVE 3D MODEL &mdash; WEB VIEW</div>
   </div>
 </div>
@@ -44,7 +44,7 @@ function fatal(t) { errEl.style.display='block'; errEl.textContent='ERROR \u2014
 window.onerror = function(msg, src, line) { fatal(msg + ' @' + (src||'?') + ':' + (line||'?')); };
 if (typeof THREE === 'undefined') { fatal('THREE undefined \u2014 CDN scripts blocked'); }
 else try {
-  var GLB = 'https://base44.app/api/apps/69f56986c51e35a876adf38d/files/mp/public/69f56986c51e35a876adf38d/e0355cf8d_AEDAN-ARMED-V1.glb';
+  var GLB = './models/AEDAN-V7-MO-ARMED.glb';
   var renderer = new THREE.WebGLRenderer({ antialias:true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(innerWidth, innerHeight);
