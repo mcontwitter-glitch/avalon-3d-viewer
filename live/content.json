@@ -1,5 +1,5 @@
 {
-  "content_version": "2026.09.11-unity-shell",
+  "content_version": "2026.09.11-389",
   "files": [
     "art/CINEMATIC-CAMPAIGN-I-AGE-OF-KINGS-CANON.png",
     "art/CINEMATIC-TEASER-KEYART-CANON.png",
@@ -66,8 +66,8 @@
     "ui/ui-index.html"
   ],
   "apk": {
-    "versionCode": 107,
-    "versionName": "1.0.0-unity",
+    "versionCode": 112,
+    "versionName": "1.0",
     "url": "https://mcontwitter-glitch.github.io/avalon-3d-viewer/live/AVALON-WAKING-GATES-TEST-LATEST.apk"
   }
 }
